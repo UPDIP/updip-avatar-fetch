@@ -2,7 +2,7 @@ const fetcher = require('./lib/updip-avatar-fetch')
 const fs = require('fs')
 const fetch = require('node-fetch')
 
-const targetDir = './images/'
+const targetDir = process.env.UPDIP_AVATAR_FETCH_DIR || './images/'
 
 fetcher.getUsersFromUpdip().then(users => {
   return fetcher.getLinksToProfileImages(users);
