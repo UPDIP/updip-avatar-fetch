@@ -11,7 +11,8 @@ module.exports = {
         COMMON_VARIABLE: "true"
       },
       env_production : {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        UPDIP_AVATAR_FETCH_DIR: "/home/updip/httpdocs/profiles/",
       }
     }
   ],
