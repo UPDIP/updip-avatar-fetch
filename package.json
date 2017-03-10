@@ -1,0 +1,17 @@
+{
+  "name": "updip-avatar-fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kai Wood <kwood@kwd.io> (http://kwd.io)",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^1.6.3",
+    "pnut-butter": "0.0.2",
+    "xml2js": "^0.4.17"
+  }
+}
