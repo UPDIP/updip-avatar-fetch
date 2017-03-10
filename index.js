@@ -1,24 +1,25 @@
-const fs = require('fs');
-const fetch = require('node-fetch');
-const parse = require('xml2js').parseString;
-const pnut = require('pnut-butter');
+const fetcher = require('./lib/updip-avatar-fetch')
+const fs = require('fs')
+const fetch = require('node-fetch')
 
-fetch('http://www.updip.link/feed.xml').then((xml) => {
-  return xml.text()
-}).then((data) => {
-  parse(data, (err, xml) => {
-    xml.cards.card.forEach(card => {
-      let username = card.title[0];
+const targetDir = './images/'
 
-      pnut.avatar(`@${username}`).then(buffer => {
-        fs.writeFileSync(`./images/${username}.png`, buffer);
-        console.log(`${username} saved…`);
-      }, (err) => {
-        console.log(err);
-      });
+fetcher.getUsersFromUpdip().then(users => {
+  return fetcher.getLinksToProfileImages(users);
+}).then(users => {
+  console.log(users);
 
+  users.forEach(user => {
+    fetch(user.avatar).then(res => {
+      let dest = fs.createWriteStream(`${targetDir}${user.user}.png`)
+      res.body.pipe(dest)
+    }).then(() => {
+      console.log(new Date(), user.user, 'fetched successfully');
+    }, err => {
+      console.log(err);
     })
-  });
+  })
+
 }).catch(err => {
   console.log(err);
-});
+})
