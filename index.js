@@ -8,8 +8,6 @@ function run() {
   fetcher.getUsersFromUpdip().then(users => {
     return fetcher.getLinksToProfileImages(users);
   }).then(users => {
-    console.log(users);
-
     users.forEach(user => {
       fetch(user.avatar).then(res => {
         let dest = fs.createWriteStream(`${targetDir}${user.user}.png`)
