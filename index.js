@@ -19,12 +19,10 @@ function run() {
       })
     })
 
+    setTimeout(run, 3600000)
   }).catch(err => {
     console.log(err);
   })
 }
 
 run();
-setInterval(() => {
-  run()
-}, 3600000)
